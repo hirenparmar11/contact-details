@@ -2,6 +2,7 @@ package learn.spring.rest.contacts;
 
 import static org.hamcrest.Matchers.hasItem;
 import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.anyOf;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -112,13 +113,13 @@ public class ContactsControllerTest {
 			.andDo(print())
 			.andExpect(jsonPath("$.[0].contactId", is(1)))
 			.andExpect(jsonPath("$.[0].name",is(contacts.get(0).getName())))
-			.andExpect(jsonPath("$.[0].number", is(contacts.get(0).getNumber())))
+			.andExpect(jsonPath("$.[0].number", anyOf(is((Number) contacts.get(0).getNumber()), is((Number) contacts.get(0).getNumber().intValue()))))
 			.andExpect(jsonPath("$.[1].contactId", is(2)))
 			.andExpect(jsonPath("$.[1].name", is(contacts.get(1).getName())))
-			.andExpect(jsonPath("$.[1].number", is(contacts.get(1).getNumber())))
+			.andExpect(jsonPath("$.[1].number", anyOf(is((Number) contacts.get(1).getNumber()), is((Number) contacts.get(1).getNumber().intValue()))))
 			.andExpect(jsonPath("$.[2].contactId", is(3)))
 			.andExpect(jsonPath("$.[2].name", is(contacts.get(2).getName())))	
-			.andExpect(jsonPath("$.[2].number", is(contacts.get(2).getNumber())))
+			.andExpect(jsonPath("$.[2].number", anyOf(is((Number) contacts.get(2).getNumber()), is((Number) contacts.get(2).getNumber().intValue()))))
 			.andExpect(status().isOk());
 
 	}
