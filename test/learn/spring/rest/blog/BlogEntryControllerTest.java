@@ -57,7 +57,7 @@ public class BlogEntryControllerTest {
 		blogEntry.setId(1L);
 		blogEntry.setTitle("Test Title");
 		
-		when(service.find(1L)).thenReturn(blogEntry);
+		when(service.findBlogEntry(1L)).thenReturn(blogEntry);
 		
 		mockMvc.perform(get("/rest/blog-entries/1"))
 			.andDo(print())
@@ -69,7 +69,7 @@ public class BlogEntryControllerTest {
 	
 	@Test
 	public void getNonExistingBlogEntry() throws Exception {		
-		when(service.find(1L)).thenReturn(null);
+		when(service.findBlogEntry(1L)).thenReturn(null);
 		
 		mockMvc.perform(get("/rest/blog-entries/1"))
 			.andDo(print())
@@ -126,7 +126,7 @@ public class BlogEntryControllerTest {
         insertEntry.setId(1L);
         insertEntry.setTitle("Test Title");
 
-        service.insert(Mockito.any(BlogEntry.class));
+        service.insertBlogEntry(Mockito.any(BlogEntry.class));
 
         mockMvc.perform(post("/rest/blog-entries/")
                 .content("{\"title\":\"Test Title\"}")

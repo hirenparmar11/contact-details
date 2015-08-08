@@ -22,12 +22,12 @@ public class BlogEntryCacheService implements BlogEntryService {
 	}
 
 	@Override
-	public BlogEntry find(Long id) {
+	public BlogEntry findBlogEntry(Long id) {
 		return blogEntries.get(id);
 	}
 	
 	@Override
-	public boolean insert(BlogEntry blogEntry) {
+	public boolean insertBlogEntry(BlogEntry blogEntry) {
 		if(blogEntries.containsKey(blogEntry.getId())) {
 			return false;
 		} else {
@@ -37,7 +37,7 @@ public class BlogEntryCacheService implements BlogEntryService {
 	}
 	
 	@Override
-	public boolean update(BlogEntry blogEntry) {
+	public boolean updateBlogEntry(BlogEntry blogEntry) {
 		if(blogEntries.containsKey(blogEntry.getId())) {
 			blogEntries.put(blogEntry.getId(), blogEntry);
 			return true;
@@ -46,7 +46,7 @@ public class BlogEntryCacheService implements BlogEntryService {
 	}
 	
 	@Override
-	public boolean delete(BlogEntry blogEntry) {
+	public boolean deleteBlogEntry(BlogEntry blogEntry) {
 		if(blogEntries.containsKey(blogEntry.getId())) {
 			blogEntries.remove(blogEntry.getId());
 			return true;

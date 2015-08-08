@@ -28,7 +28,7 @@ public class BlogEntryController {
 	@RequestMapping(value = "/{blogEntryId}", method = RequestMethod.GET)
 	public ResponseEntity<BlogEntryResource> getBlogEntry(
 			@PathVariable Long blogEntryId) {
-		BlogEntry blogEntry = service.find(blogEntryId);
+		BlogEntry blogEntry = service.findBlogEntry(blogEntryId);
 		if (blogEntry != null) {
 			BlogEntryResource resource = new BlogEntryResourceAssembler()
 					.toResource(blogEntry);
@@ -54,7 +54,7 @@ public class BlogEntryController {
 	public ResponseEntity<BlogEntryResource> addBlogEntry(
 			@RequestBody BlogEntryResource blogEntryResource) {
 		BlogEntry blogEntry = blogEntryResource.toBlogEntry();
-		boolean inserted = service.insert(blogEntry);
+		boolean inserted = service.insertBlogEntry(blogEntry);
 		if (inserted) {
 			BlogEntryResource resource = new BlogEntryResourceAssembler()
 					.toResource(blogEntry);
@@ -68,8 +68,8 @@ public class BlogEntryController {
 	@RequestMapping(value = "/{blogEntryId}", method = RequestMethod.DELETE)
 	public ResponseEntity<BlogEntryResource> deleteBlogEntry(
 			@PathVariable Long blogEntryId) {
-		BlogEntry blogEntry = service.find(blogEntryId);
-		boolean deleted = service.delete(blogEntry);
+		BlogEntry blogEntry = service.findBlogEntry(blogEntryId);
+		boolean deleted = service.deleteBlogEntry(blogEntry);
 		if (deleted) {
 			BlogEntryResource res = new BlogEntryResourceAssembler()
 					.toResource(blogEntry);
@@ -83,7 +83,7 @@ public class BlogEntryController {
 	public ResponseEntity<BlogEntryResource> updateBlogEntry(
 			@PathVariable Long blogEntryId,
 			@RequestBody BlogEntryResource sentBlogEntry) {
-		boolean updatedEntry = service.update(sentBlogEntry.toBlogEntry());
+		boolean updatedEntry = service.updateBlogEntry(sentBlogEntry.toBlogEntry());
 		if (updatedEntry) {
 			BlogEntryResource resource = new BlogEntryResourceAssembler()
 					.toResource(sentBlogEntry.toBlogEntry());
