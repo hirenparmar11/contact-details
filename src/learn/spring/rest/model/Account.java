@@ -1,5 +1,6 @@
 package learn.spring.rest.model;
 
+
 public class Account {
     private Long id;
     private String name;

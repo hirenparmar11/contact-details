@@ -67,7 +67,7 @@ public class AccountControllerTest {
         mockMvc.perform(post("/rest/accounts/1/blogs")
                 .content("{\"title\":\"Test Title\"}")
                 .contentType(MediaType.APPLICATION_JSON))
-                .andDo(print())
+//                .andDo(print())
                 .andExpect(jsonPath("$.title", is("Test Title")))
                 .andExpect(jsonPath("$.links[*].href", hasItem(endsWith("/blogs/1"))))
                 .andExpect(header().string("Location", endsWith("/blogs/1")))
