@@ -1,10 +1,10 @@
-package learn.spring.rest.services;
+package learn.spring.rest.repositories;
 
 import java.util.List;
 
 import learn.spring.rest.model.BlogEntry;
 
-public interface BlogEntryService {
+public interface BlogEntryRepository {
 
 	public BlogEntry findBlogEntry(Long id); // Returns the BlogEntry or null if it can't be found
     public BlogEntry deleteBlogEntry(Long id); // Deletes the found BlogEntry or returns null if it can't be found

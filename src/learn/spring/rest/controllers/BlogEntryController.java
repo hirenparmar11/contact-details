@@ -1,7 +1,5 @@
 package learn.spring.rest.controllers;
 
-import java.util.List;
-
 import learn.spring.rest.model.BlogEntry;
 import learn.spring.rest.resources.BlogEntryResource;
 import learn.spring.rest.resources.asm.BlogEntryResourceAssembler;
@@ -39,40 +37,38 @@ public class BlogEntryController {
 		}
 	}
 
-	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public ResponseEntity<List<BlogEntry>> getBlogEntries() {
-		if (service.getBlogEntries() != null
-				&& service.getBlogEntries().size() > 0) {
-			return new ResponseEntity<List<BlogEntry>>(
-					service.getBlogEntries(), HttpStatus.OK);
-		} else {
-			return new ResponseEntity<List<BlogEntry>>(HttpStatus.NOT_FOUND);
-		}
-	}
+//	@RequestMapping(value = "/", method = RequestMethod.GET)
+//	public ResponseEntity<List<BlogEntry>> getBlogEntries() {
+//		if (service.getBlogEntries() != null
+//				&& service.getBlogEntries().size() > 0) {
+//			return new ResponseEntity<List<BlogEntry>>(
+//					service.getBlogEntries(), HttpStatus.OK);
+//		} else {
+//			return new ResponseEntity<List<BlogEntry>>(HttpStatus.NOT_FOUND);
+//		}
+//	}
 
-	@RequestMapping(value = "/", method = RequestMethod.POST)
-	public ResponseEntity<BlogEntryResource> addBlogEntry(
-			@RequestBody BlogEntryResource blogEntryResource) {
-		BlogEntry blogEntry = blogEntryResource.toBlogEntry();
-		boolean inserted = service.insertBlogEntry(blogEntry);
-		if (inserted) {
-			BlogEntryResource resource = new BlogEntryResourceAssembler()
-					.toResource(blogEntry);
-			return new ResponseEntity<BlogEntryResource>(resource,
-					HttpStatus.OK);
-		} else {
-			return new ResponseEntity<BlogEntryResource>(HttpStatus.NOT_FOUND);
-		}
-	}
+//	@RequestMapping(value = "/", method = RequestMethod.POST)
+//	public ResponseEntity<BlogEntryResource> addBlogEntry(
+//			@RequestBody BlogEntryResource blogEntryResource) {
+//		BlogEntry insertedblogEntry = service.insertBlogEntry(blogEntryResource.toBlogEntry());
+//		if (insertedblogEntry != null) {
+//			BlogEntryResource resource = new BlogEntryResourceAssembler()
+//					.toResource(blogEntry);
+//			return new ResponseEntity<BlogEntryResource>(resource,
+//					HttpStatus.OK);
+//		} else {
+//			return new ResponseEntity<BlogEntryResource>(HttpStatus.NOT_FOUND);
+//		}
+//	}
 
 	@RequestMapping(value = "/{blogEntryId}", method = RequestMethod.DELETE)
 	public ResponseEntity<BlogEntryResource> deleteBlogEntry(
 			@PathVariable Long blogEntryId) {
-		BlogEntry blogEntry = service.findBlogEntry(blogEntryId);
-		boolean deleted = service.deleteBlogEntry(blogEntry);
-		if (deleted) {
+		 BlogEntry deletedblogEntry = service.deleteBlogEntry(blogEntryId);
+		if (deletedblogEntry!= null) {
 			BlogEntryResource res = new BlogEntryResourceAssembler()
-					.toResource(blogEntry);
+					.toResource(deletedblogEntry);
 			return new ResponseEntity<BlogEntryResource>(res, HttpStatus.OK);
 		} else {
 			return new ResponseEntity<BlogEntryResource>(HttpStatus.NOT_FOUND);
@@ -83,8 +79,8 @@ public class BlogEntryController {
 	public ResponseEntity<BlogEntryResource> updateBlogEntry(
 			@PathVariable Long blogEntryId,
 			@RequestBody BlogEntryResource sentBlogEntry) {
-		boolean updatedEntry = service.updateBlogEntry(sentBlogEntry.toBlogEntry());
-		if (updatedEntry) {
+		BlogEntry updatedEntry = service.updateBlogEntry(blogEntryId, sentBlogEntry.toBlogEntry());
+		if (updatedEntry != null) {
 			BlogEntryResource resource = new BlogEntryResourceAssembler()
 					.toResource(sentBlogEntry.toBlogEntry());
 			return new ResponseEntity<BlogEntryResource>(resource,
