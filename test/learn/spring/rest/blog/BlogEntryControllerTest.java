@@ -109,7 +109,6 @@ public class BlogEntryControllerTest {
 //			.andExpect(status().isOk());
 //
 //	}
-//	
 //	@Test
 //	public void getEmptyBlogEntries() throws Exception {		
 //		when(service.getBlogEntries()).thenReturn(new ArrayList<BlogEntry>());
