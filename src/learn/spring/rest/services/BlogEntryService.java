@@ -16,7 +16,7 @@ public interface BlogEntryService {
      */
     public BlogEntry updateBlogEntry(Long id, BlogEntry data);
 
-    public BlogEntry createBlogEntry(BlogEntry data);
-
-    public List<BlogEntry> findByBlogId(Long blogId);
+//    public BlogEntry createBlogEntry(BlogEntry data);
+//
+//    public List<BlogEntry> findByBlogId(Long blogId);
 }

@@ -1,14 +1,18 @@
 package learn.spring.rest.blog;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.mockito.ArgumentCaptor;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-import org.springframework.http.MediaType;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import static org.hamcrest.Matchers.endsWith;
+import static org.hamcrest.Matchers.hasItem;
+import static org.hamcrest.Matchers.hasItems;
+import static org.hamcrest.Matchers.is;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,20 +25,16 @@ import learn.spring.rest.services.BlogService;
 import learn.spring.rest.services.exceptions.BlogNotFoundException;
 import learn.spring.rest.services.util.BlogEntryList;
 import learn.spring.rest.services.util.BlogList;
-import static org.hamcrest.Matchers.*;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-/**
- * Created by Chris on 6/28/14.
- */
+import org.junit.Before;
+import org.junit.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+
 public class BlogControllerTest {
     @InjectMocks
     private BlogController controller;
@@ -51,7 +51,8 @@ public class BlogControllerTest {
         mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
     }
 
-    @Test
+    @SuppressWarnings("unchecked")
+	@Test
     public void findAllBlogs() throws Exception {
         List<Blog> list = new ArrayList<Blog>();
 
@@ -65,8 +66,8 @@ public class BlogControllerTest {
         blogB.setTitle("Title B");
         list.add(blogB);
 
-        BlogList allBlogs = new BlogList();
-        allBlogs.setBlogs(list);
+        BlogList allBlogs = new BlogList(list);
+        //allBlogs.setBlogs(list);
 
         when(blogService.findAllBlogs()).thenReturn(allBlogs);
 
@@ -76,7 +77,8 @@ public class BlogControllerTest {
                 .andExpect(status().isOk());
     }
 
-    @Test
+    @SuppressWarnings("unchecked")
+	@Test
     public void getBlog() throws Exception {
         Blog blog = new Blog();
         blog.setTitle("Test Title");
@@ -143,13 +145,13 @@ public class BlogControllerTest {
         entryB.setId(2L);
         entryB.setTitle("Test Title");
 
-        List<BlogEntry> blogListings = new ArrayList();
+        List<BlogEntry> blogListings = new ArrayList<BlogEntry>();
         blogListings.add(entryA);
         blogListings.add(entryB);
 
-        BlogEntryList list = new BlogEntryList();
-        list.setEntries(blogListings);
-        list.setBlogId(1L);
+        BlogEntryList list = new BlogEntryList(1L, blogListings);
+//        list.setEntries(blogListings);
+//        list.setBlogId(1L);
 
         when(blogService.findAllBlogEntries(1L)).thenReturn(list);
 

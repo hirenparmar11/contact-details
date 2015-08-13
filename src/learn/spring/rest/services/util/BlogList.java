@@ -8,6 +8,10 @@ import learn.spring.rest.model.Blog;
 public class BlogList {
 
     private List<Blog> blogs = new ArrayList<Blog>();
+    
+    public BlogList(List<Blog> resultList) {
+        this.blogs = resultList;
+    }
 
     public List<Blog> getBlogs() {
         return blogs;

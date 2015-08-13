@@ -1,12 +1,10 @@
 package learn.spring.rest.services.impl;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-
 import learn.spring.rest.model.BlogEntry;
 import learn.spring.rest.repositories.BlogEntryRepository;
 import learn.spring.rest.services.BlogEntryService;
+
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class BlogEntryServiceImpl implements BlogEntryService {
 	
@@ -15,34 +13,29 @@ public class BlogEntryServiceImpl implements BlogEntryService {
 
 	@Override
 	public BlogEntry findBlogEntry(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		return blogEntryRepository.findBlogEntry(id);
 	}
 
 	@Override
 	public BlogEntry deleteBlogEntry(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		return blogEntryRepository.deleteBlogEntry(id);
 	}
 
 	@Override
 	public BlogEntry updateBlogEntry(Long id, BlogEntry data) {
-		// TODO Auto-generated method stub
-		return null;
+		return blogEntryRepository.updateBlogEntry(id, data);
 	}
 
-	@Override
-	public BlogEntry createBlogEntry(BlogEntry data) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<BlogEntry> findByBlogId(Long blogId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	
+//	@Override
+//	public BlogEntry createBlogEntry(BlogEntry data) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	@Override
+//	public List<BlogEntry> findByBlogId(Long blogId) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
 
 }
