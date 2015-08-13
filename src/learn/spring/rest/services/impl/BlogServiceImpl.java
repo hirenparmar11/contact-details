@@ -14,41 +14,41 @@ import learn.spring.rest.services.util.BlogList;
 public class BlogServiceImpl implements BlogService {
 	
 	@Autowired
-    private BlogRepository blogRepo;
+    private BlogRepository blogRepository;
 
     @Autowired
-    private BlogEntryRepository entryRepo;
+    private BlogEntryRepository entryRepository;
 
 	@Override
 	public BlogEntry createBlogEntry(Long blogId, BlogEntry data) {
-		Blog blog = blogRepo.findBlog(blogId);
+		Blog blog = blogRepository.findBlog(blogId);
         if(blog == null)
         {
             throw new BlogNotFoundException();
         }
-        BlogEntry entry = entryRepo.createBlogEntry(data);
+        BlogEntry entry = entryRepository.createBlogEntry(data);
         entry.setBlog(blog);
         return entry;
 	}
 
 	@Override
 	public BlogList findAllBlogs() {
-		return new BlogList(blogRepo.findAllBlogs());
+		return new BlogList(blogRepository.findAllBlogs());
 	}
 
 	@Override
 	public BlogEntryList findAllBlogEntries(Long blogId) {
-		Blog blog = blogRepo.findBlog(blogId);
+		Blog blog = blogRepository.findBlog(blogId);
         if(blog == null)
         {
             throw new BlogNotFoundException();
         }
-        return new BlogEntryList(blogId, entryRepo.findByBlogId(blogId));
+        return new BlogEntryList(blogId, entryRepository.findByBlogId(blogId));
 	}
 
 	@Override
 	public Blog findBlog(Long id) {
-		return blogRepo.findBlog(id);
+		return blogRepository.findBlog(id);
 	}
 
 }
