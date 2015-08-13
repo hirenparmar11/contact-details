@@ -1,6 +1,8 @@
 package learn.spring.rest.services.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import learn.spring.rest.model.Blog;
 import learn.spring.rest.model.BlogEntry;
@@ -11,6 +13,9 @@ import learn.spring.rest.services.exceptions.BlogNotFoundException;
 import learn.spring.rest.services.util.BlogEntryList;
 import learn.spring.rest.services.util.BlogList;
 
+//Service - singleton, like Component
+@Service
+@Transactional
 public class BlogServiceImpl implements BlogService {
 	
 	@Autowired

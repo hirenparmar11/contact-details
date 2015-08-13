@@ -1,6 +1,8 @@
 package learn.spring.rest.services.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import learn.spring.rest.model.Account;
 import learn.spring.rest.model.Blog;
@@ -13,6 +15,8 @@ import learn.spring.rest.services.exceptions.BlogExistsException;
 import learn.spring.rest.services.util.AccountList;
 import learn.spring.rest.services.util.BlogList;
 
+@Service
+@Transactional
 public class AccountServiceImpl implements AccountService {
 	
 	@Autowired

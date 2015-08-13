@@ -7,6 +7,7 @@ import learn.spring.rest.resources.ContactResource;
 import learn.spring.rest.resources.asm.ContactResourceAssembler;
 import learn.spring.rest.services.ContactService;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -21,6 +22,7 @@ public class ContactsController {
 	
 	private ContactService service;
 	
+	@Autowired
 	public ContactsController(ContactService service) {
 		this.service = service;
 	}
